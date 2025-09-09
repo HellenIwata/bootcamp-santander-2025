@@ -1,0 +1,21 @@
+'''
+Model for the declarive base for app.
+'''
+
+from uuid import uuid4
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.dialects.postgresql import UUID as PG_UUID
+from sqlalchemy import UUID
+
+
+class BaseModel(DeclarativeBase):
+    '''
+    Base model for SQLAlchemy declarative base.
+    '''
+    id: Mapped[UUID] = mapped_column(
+        PG_UUID(as_uuid=True),
+        default=uuid4, 
+        nullable=False,
+        unique=True,
+        index=True
+    )
